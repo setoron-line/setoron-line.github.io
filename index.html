@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>67.222.758 Fagner Gonzaga Henrique Silveira</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .card-icon.blue { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .card-icon.green { background: linear-gradient(135deg, #11998e, #38ef7d); }
+        .card-icon.orange { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .card-icon.purple { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .card-icon.red { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .card-icon.teal { background: linear-gradient(135deg, #30cfd0, #330867); }
+
+        .card h3 {
+            font-size: 1.1rem;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .card .value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .card .value.small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #666;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
+
+        .info-section h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-section h2 i {
+            color: #667eea;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-table tr {
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .info-table td {
+            padding: 18px 15px;
+        }
+
+        .info-table td:first-child {
+            font-weight: 600;
+            color: #667eea;
+            width: 40%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-table td:last-child {
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-active::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* CNAE Box */
+        .cnae-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .cnae-box h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .cnae-box .cnae-code {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .cnae-box .cnae-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-table td {
+                display: block;
+                width: 100%;
+                padding: 10px 0;
+            }
+
+            .info-table td:first-child {
+                width: 100%;
+                padding-bottom: 5px;
+            }
+
+            .info-table tr {
+                padding: 15px 0;
+                display: block;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>67.222.758 Fagner Gonzaga Henrique Silveira</h1>
+            <p class="subtitle">Informações Cadastrais da Empresa</p>
+            <div class="badge">
+                <i class="fas fa-building"></i> Empresa Individual
+            </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="cards-grid">
+            <div class="card fade-in">
+                <div class="card-icon blue">
+                    <i class="fas fa-id-card"></i>
+                </div>
+                <h3>CNPJ</h3>
+                <div class="value">67.222.758/0001-45</div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-icon green">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>Data de Abertura</h3>
+                <div class="value">09 de Junho de 2026</div>
+                <div class="value small">Empresa nova - há poucos dias</div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-icon orange">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>Localização</h3>
+                <div class="value">Alto Caparaó, MG</div>
+                <div class="value small">Minas Gerais, Brasil</div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-icon purple">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Atividade Principal</h3>
+                <div class="value">Restaurantes e Similares</div>
+                <div class="value small">CNAE: 56.11-2-03</div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-icon red">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3>Titular / Sócio</h3>
+                <div class="value">Fagner Gonzaga Henrique Silveira</div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-icon teal">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Situação Cadastral</h3>
+                <div class="value">
+                    <span class="status-badge status-active">Ativa</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detalhes Completos -->
+        <div class="info-section fade-in">
+            <h2><i class="fas fa-clipboard-list"></i> Detalhes Cadastrais</h2>
+            <table class="info-table">
+                <tr>
+                    <td><i class="fas fa-building"></i> Razão Social</td>
+                    <td>67.222.758 Fagner Gonzaga Henrique Silveira</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-id-card"></i> CNPJ</td>
+                    <td>67.222.758/0001-45</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-calendar"></i> Data de Abertura</td>
+                    <td>09/06/2026</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-map-marker-alt"></i> Município</td>
+                    <td>Alto Caparaó - MG</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-flag"></i> Estado</td>
+                    <td>Minas Gerais</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-utensils"></i> CNAE Principal</td>
+                    <td>56.11-2-03 - Restaurantes e similares</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-user"></i> Natureza Jurídica</td>
+                    <td>Empresa Individual</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-check-circle"></i> Situação</td>
+                    <td><span class="status-badge status-active">Ativa</span></td>
+                </tr>
+            </table>
+
+            <div class="cnae-box">
+                <h4><i class="fas fa-briefcase"></i> Atividade Econômica Principal</h4>
+                <div class="cnae-code">56.11-2-03</div>
+                <div class="cnae-desc">Restaurantes e similares</div>
+            </div>
+        </div>
+
+        <!-- Sobre a Empresa -->
+        <div class="info-section fade-in">
+            <h2><i class="fas fa-info-circle"></i> Sobre a Empresa</h2>
+            <p style="line-height: 1.8; color: #555; font-size: 1.05rem;">
+                A empresa <strong>67.222.758 Fagner Gonzaga Henrique Silveira</strong> é um estabelecimento 
+                de alimentação localizado em <strong>Alto Caparaó, Minas Gerais</strong>. Com CNPJ 
+                <strong>67.222.758/0001-45</strong>, foi registrada em <strong>09 de junho de 2026</strong>, 
+                sendo uma empresa muito recente no mercado.
+            </p>
+            <p style="line-height: 1.8; color: #555; font-size: 1.05rem; margin-top: 15px;">
+                A atividade principal da empresa é classificada no CNAE <strong>56.11-2-03</strong> — 
+                <strong>Restaurantes e similares</strong>, indicando que opera no setor de serviços 
+                de alimentação e bebidas.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
