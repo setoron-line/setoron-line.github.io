@@ -1,184 +1,476 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>67.222.758 Fagner Gonzaga Henrique Silveira</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crédito Fácil Brasil - Empréstimo Pessoal</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #065f46;
+            --primary-light: #10b981;
+            --secondary: #0369a1;
+            --bg: #f0f9ff;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #059669;
+            --warning: #d97706;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 1rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; position: relative; }
+        header p { font-size: 1.2rem; opacity: 0.95; max-width: 600px; margin: 0 auto; position: relative; }
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        
+        .hero-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+        }
+        .hero-card {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            text-align: center;
+            border-top: 4px solid var(--primary-light);
+            transition: transform 0.3s;
+        }
+        .hero-card:hover { transform: translateY(-5px); }
+        .hero-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero-card h3 { color: var(--primary); margin-bottom: 0.5rem; }
+        .hero-card p { color: var(--text-light); font-size: 0.95rem; }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
+        section { padding: 4rem 0; }
+        h2 { text-align: center; font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary); }
+        .subtitle { text-align: center; color: var(--text-light); margin-bottom: 3rem; }
 
-body{
-background:#f5f5f5;
-color:#333;
-line-height:1.6;
-}
+        .simulator {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid var(--border);
+        }
+        .form-group { margin-bottom: 1.8rem; }
+        label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text); }
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--border);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(6,95,70,0.3);
+        }
+        .range-value {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 0.5rem;
+        }
+        .result-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .result-box .parcela {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+        }
+        .result-box .detail {
+            opacity: 0.9;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
 
-header{
-background:#0d47a1;
-color:#fff;
-padding:40px 20px;
-text-align:center;
-}
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .example-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 1.8rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        .example-card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border-color: var(--primary-light);
+        }
+        .example-card .tag {
+            display: inline-block;
+            background: #d1fae5;
+            color: var(--success);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .example-card h4 { font-size: 1.3rem; margin-bottom: 1rem; color: var(--text); }
+        .example-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        .example-row:last-child { border-bottom: none; }
+        .example-row span:first-child { color: var(--text-light); }
+        .example-row span:last-child { font-weight: 700; color: var(--primary); }
 
-header h1{
-font-size:2rem;
-margin-bottom:10px;
-}
+        .info-section {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            margin-top: 2rem;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .info-item {
+            padding: 1.5rem;
+            background: var(--bg);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-light);
+        }
+        .info-item h4 { color: var(--primary); margin-bottom: 0.5rem; }
 
-nav{
-background:#08306b;
-padding:15px;
-text-align:center;
-}
+        .cta {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 20px;
+            margin: 3rem auto;
+            max-width: 900px;
+        }
+        .cta h2 { color: white; margin-bottom: 1rem; }
+        .btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
 
-nav a{
-color:#fff;
-text-decoration:none;
-margin:0 15px;
-font-weight:bold;
-}
+        .disclaimer {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        .disclaimer strong { color: #78350f; }
 
-section{
-max-width:1200px;
-margin:auto;
-padding:50px 20px;
-}
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
 
-.card{
-background:#fff;
-padding:25px;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
-margin-bottom:20px;
-}
-
-h2{
-color:#0d47a1;
-margin-bottom:15px;
-}
-
-footer{
-background:#111;
-color:#fff;
-text-align:center;
-padding:30px 20px;
-}
-
-.btn{
-display:inline-block;
-background:#0d47a1;
-color:#fff;
-padding:12px 25px;
-border-radius:6px;
-text-decoration:none;
-margin-top:15px;
-}
-</style>
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8rem; }
+            .simulator { padding: 1.5rem; }
+            .result-box .parcela { font-size: 2rem; }
+            .info-section { padding: 1.5rem; }
+        }
+    </style>
+<base target="_blank">
 </head>
-
 <body>
 
 <header>
-<h1>67.222.758 Fagner Gonzaga Henrique Silveira</h1>
-<p>Soluções e atendimento com compromisso e qualidade.</p>
+    <h1>💰 Crédito Fácil Brasil</h1>
+    <p>Empréstimo pessoal rápido, seguro e sem burocracia para quem tem 18 anos ou mais.</p>
+    <div class="badge">Taxa a partir de 1,93% ao mês</div>
 </header>
 
-<nav>
-<a href="#sobre">Sobre</a>
-<a href="#servicos">Serviços</a>
-<a href="#privacidade">Privacidade</a>
-<a href="#termos">Termos</a>
-<a href="#contato">Contato</a>
-</nav>
+<div class="container">
+    <div class="hero-cards">
+        <div class="hero-card">
+            <div class="icon">⚡</div>
+            <h3>Aprovação Rápida</h3>
+            <p>Resposta em poucos minutos direto no seu celular, sem filas e sem complicação.</p>
+        </div>
+        <div class="hero-card">
+            <div class="icon">🛡️</div>
+            <h3>100% Seguro</h3>
+            <p>Seus dados estão protegidos com criptografia de ponta a ponta.</p>
+        </div>
+        <div class="hero-card">
+            <div class="icon">📋</div>
+            <h3>Sem Garantidor</h3>
+            <p>Não precisa de coobrigado, imóvel ou automóvel como garantia.</p>
+        </div>
+    </div>
 
-<section id="sobre">
-<div class="card">
-<h2>Sobre a Empresa</h2>
-<p>
-A empresa 67.222.758 Fagner Gonzaga Henrique Silveira está localizada em
-Alto Caparaó - Minas Gerais e possui situação cadastral ativa.
-Nosso compromisso é oferecer atendimento de qualidade, transparência e
-soluções adequadas às necessidades dos clientes.
-</p>
+    <section id="simulador">
+        <h2>Simule Agora</h2>
+        <p class="subtitle">Ajuste o valor e as parcelas para ver quanto você vai pagar</p>
+        
+        <div class="simulator">
+            <div class="form-group">
+                <label for="valor">Quanto você precisa?</label>
+                <input type="range" id="valor" min="1000" max="50000" step="500" value="5000" oninput="atualizarSimulacao()">
+                <div class="range-value" id="valorDisplay">R$ 5.000,00</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="parcelas">Em quantas parcelas?</label>
+                <input type="range" id="parcelas" min="6" max="48" step="6" value="12" oninput="atualizarSimulacao()">
+                <div class="range-value" id="parcelasDisplay">12 vezes</div>
+            </div>
+
+            <div class="result-box">
+                <div>Valor estimado da parcela:</div>
+                <div class="parcela" id="parcelaValor">R$ 483,23</div>
+                <div class="detail">
+                    Total a pagar: <strong id="totalPagar">R$ 5.798,76</strong> | 
+                    Juros total: <strong id="jurosTotal">R$ 798,76</strong>
+                </div>
+                <div class="detail" style="margin-top: 0.8rem; font-size: 0.85rem; opacity: 0.8;">
+                    Taxa de juros: 1,93% a.m. | CET máximo: 2,15% a.m.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="exemplos">
+        <h2>Exemplos de Simulação</h2>
+        <p class="subtitle">Veja quanto ficaria o empréstimo em diferentes valores e prazos</p>
+        
+        <div class="examples-grid">
+            <div class="example-card">
+                <div class="tag">Curto Prazo</div>
+                <h4>R$ 1.000 em 6x</h4>
+                <div class="example-row"><span>Parcela:</span><span>R$ 175,42</span></div>
+                <div class="example-row"><span>Total:</span><span>R$ 1.052,52</span></div>
+                <div class="example-row"><span>Juros:</span><span>R$ 52,52</span></div>
+            </div>
+            
+            <div class="example-card">
+                <div class="tag">Mais Acessível</div>
+                <h4>R$ 3.000 em 12x</h4>
+                <div class="example-row"><span>Parcela:</span><span>R$ 289,94</span></div>
+                <div class="example-row"><span>Total:</span><span>R$ 3.479,28</span></div>
+                <div class="example-row"><span>Juros:</span><span>R$ 479,28</span></div>
+            </div>
+            
+            <div class="example-card">
+                <div class="tag">Mais Popular</div>
+                <h4>R$ 5.000 em 24x</h4>
+                <div class="example-row"><span>Parcela:</span><span>R$ 264,58</span></div>
+                <div class="example-row"><span>Total:</span><span>R$ 6.349,92</span></div>
+                <div class="example-row"><span>Juros:</span><span>R$ 1.349,92</span></div>
+            </div>
+            
+            <div class="example-card">
+                <div class="tag">Médio Prazo</div>
+                <h4>R$ 10.000 em 36x</h4>
+                <div class="example-row"><span>Parcela:</span><span>R$ 381,17</span></div>
+                <div class="example-row"><span>Total:</span><span>R$ 13.722,12</span></div>
+                <div class="example-row"><span>Juros:</span><span>R$ 3.722,12</span></div>
+            </div>
+            
+            <div class="example-card">
+                <div class="tag">Longo Prazo</div>
+                <h4>R$ 20.000 em 48x</h4>
+                <div class="example-row"><span>Parcela:</span><span>R$ 621,34</span></div>
+                <div class="example-row"><span>Total:</span><span>R$ 29.824,32</span></div>
+                <div class="example-row"><span>Juros:</span><span>R$ 9.824,32</span></div>
+            </div>
+            
+            <div class="example-card">
+                <div class="tag">Alto Valor</div>
+                <h4>R$ 50.000 em 48x</h4>
+                <div class="example-row"><span>Parcela:</span><span>R$ 1.553,35</span></div>
+                <div class="example-row"><span>Total:</span><span>R$ 74.560,80</span></div>
+                <div class="example-row"><span>Juros:</span><span>R$ 24.560,80</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="como-funciona">
+        <h2>Como Funciona</h2>
+        <p class="subtitle">Em 4 passos simples, o dinheiro está na sua conta</p>
+        <div class="info-section">
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>1. Faça a Simulação</h4>
+                    <p>Escolha o valor e o prazo que cabem no seu bolso. Não impacta seu score de crédito.</p>
+                </div>
+                <div class="info-item">
+                    <h4>2. Preencha os Dados</h4>
+                    <p>Informe seu CPF, renda e dados bancários. Tudo 100% online e seguro.</p>
+                </div>
+                <div class="info-item">
+                    <h4>3. Aprovação Imediata</h4>
+                    <p>Nossa análise leva poucos minutos. Você recebe a resposta na hora.</p>
+                </div>
+                <div class="info-item">
+                    <h4>4. Receba o Dinheiro</h4>
+                    <p>Após a assinatura digital, o valor é depositado na sua conta em até 24h úteis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="requisitos">
+        <h2>Quem Pode Solicitar?</h2>
+        <p class="subtitle">Requisitos mínimos para contratar</p>
+        <div class="info-section">
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>✅ Idade Mínima</h4>
+                    <p>Ser maior de 18 anos com documento de identidade válido em todo o território brasileiro.</p>
+                </div>
+                <div class="info-item">
+                    <h4>✅ Comprovação de Renda</h4>
+                    <p>Hollerite, extrato bancário ou declaração de IR — aceitamos diversas fontes de renda.</p>
+                </div>
+                <div class="info-item">
+                    <h4>✅ Conta Bancária</h4>
+                    <p>Possuir conta em banco com operações de crédito ativas para recebimento dos valores.</p>
+                </div>
+                <div class="info-item">
+                    <h4>✅ Restrições</h4>
+                    <p>Não é necessário nome limpo, mas a análise de crédito considera o perfil do solicitante.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cta">
+        <h2>Pronto para realizar seu projeto?</h2>
+        <p style="opacity: 0.95; font-size: 1.1rem;">Simule sem compromisso e descubra quanto você pode ter na conta ainda hoje.</p>
+        <a href="#simulador" class="btn">Simular Empréstimo</a>
+    </div>
+
+    <div class="disclaimer">
+        <strong>⚠️ Avisos Importantes:</strong><br>
+        • Taxa de juros referencial: <strong>1,93% ao mês</strong>. O Custo Efetivo Total (CET) pode variar conforme o perfil do cliente e pode chegar a até 2,15% a.m.<br>
+        • As simulações são meramente estimativas e não constituem oferta de crédito. Os valores finais serão apresentados na proposta formal.<br>
+        • O crédito está sujeito à análise e aprovação. A liberação do valor depende da validação dos documentos e dados informados.<br>
+        • Exemplo representativo: empréstimo de R$ 5.000 em 12 parcelas de R$ 483,23 — total de R$ 5.798,76 (juros de R$ 798,76).<br>
+        • Leia o contrato atentamente antes de assinar. Em caso de dúvidas, entre em contato com nossa central de atendimento.
+    </div>
 </div>
-</section>
-
-<section id="servicos">
-<div class="card">
-<h2>Serviços</h2>
-<p>
-Atuamos com dedicação para fornecer soluções personalizadas,
-priorizando qualidade, agilidade e excelência no atendimento.
-Entre em contato para conhecer nossos serviços e solicitar um orçamento.
-</p>
-</div>
-</section>
-
-<section id="contato">
-<div class="card">
-<h2>Contato</h2>
-<p><strong>Razão Social:</strong> 67.222.758 Fagner Gonzaga Henrique Silveira</p>
-<p><strong>CNPJ:</strong> 67.222.758/0001-45</p>
-<p><strong>Cidade:</strong> Alto Caparaó - MG</p>
-
-<a class="btn" href="#">Fale Conosco</a>
-</div>
-</section>
-
-<section id="privacidade">
-<div class="card">
-<h2>Política de Privacidade</h2>
-
-<p>
-Respeitamos sua privacidade e estamos comprometidos com a proteção dos dados pessoais.
-As informações eventualmente fornecidas pelos usuários serão utilizadas apenas para
-atendimento, comunicação e prestação de serviços.
-</p>
-
-<p>
-Os dados poderão ser armazenados de forma segura e não serão comercializados
-ou compartilhados indevidamente com terceiros.
-</p>
-
-<p>
-O usuário poderá solicitar atualização, correção ou exclusão de seus dados
-nos termos da legislação aplicável, incluindo a Lei Geral de Proteção de Dados (LGPD).
-</p>
-</div>
-</section>
-
-<section id="termos">
-<div class="card">
-<h2>Termos de Uso</h2>
-
-<p>
-Ao acessar este site, o usuário concorda em utilizar as informações de forma lícita
-e em conformidade com a legislação vigente.
-</p>
-
-<p>
-Todo o conteúdo disponibilizado possui caráter informativo e poderá ser alterado
-sem aviso prévio.
-</p>
-
-<p>
-A empresa não se responsabiliza por danos decorrentes do uso inadequado das
-informações disponibilizadas neste site.
-</p>
-</div>
-</section>
 
 <footer>
-<p>© 2026 - 67.222.758 Fagner Gonzaga Henrique Silveira</p>
-<p>CNPJ: 67.222.758/0001-45</p>
-<p>Todos os direitos reservados.</p>
+    <p>© 2026 Crédito Fácil Brasil. Todos os direitos reservados.</p>
 </footer>
+
+<script>
+    function calcularParcela(valor, parcelas, taxa) {
+        const i = taxa / 100;
+        const p = valor * ((i * Math.pow(1 + i, parcelas)) / (Math.pow(1 + i, parcelas) - 1));
+        return p;
+    }
+
+    function formatarMoeda(valor) {
+        return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function atualizarSimulacao() {
+        const valor = parseInt(document.getElementById('valor').value);
+        const parcelas = parseInt(document.getElementById('parcelas').value);
+        const taxa = 1.93;
+
+        document.getElementById('valorDisplay').textContent = formatarMoeda(valor);
+        document.getElementById('parcelasDisplay').textContent = parcelas + ' vezes';
+
+        const parcela = calcularParcela(valor, parcelas, taxa);
+        const total = parcela * parcelas;
+        const juros = total - valor;
+
+        document.getElementById('parcelaValor').textContent = formatarMoeda(parcela);
+        document.getElementById('totalPagar').textContent = formatarMoeda(total);
+        document.getElementById('jurosTotal').textContent = formatarMoeda(juros);
+    }
+
+    atualizarSimulacao();
+</script>
 
 </body>
 </html>
